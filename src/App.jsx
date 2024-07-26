@@ -13,6 +13,7 @@ import NavbarSimpleColored from "./components/layout/NavbarSimpleColored";
 
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import StatsCard from "./components/mantine/StatsCard";
+import StatsSegments from "./components/mantine/StatsSegments";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -21,7 +22,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <TaskManagement />,
+        element: <TaskManagementAdmin />,
         // loader: teamLoader,
       },
     ],
@@ -47,15 +48,26 @@ function App() {
   );
 }
 
-function TaskManagement() {
+function TaskManagementAdmin() {
   return (
     <div className="flex flex-wrap w-full p-2">
-      <div className="p-20 max-w-[1200px] mx-auto flex flex-col gap-20">
+      <div className="p-2 max-w-[1200px] flex flex-col gap-20 overflow-x-hidden mx-auto">
         <AdminForms />
         <TableReviews />
+        <iframe
+          src="https://v2-embednotion.com/f44f4c90528846d79d31dba4b6298deb"
+          style={{
+            width: "100%",
+            height: "500px",
+            border: "2px solid #ccc",
+            borderRadius: "10px",
+            padding: "none", // Note: 'padding' should be a valid CSS value like '0px' or '0'
+          }}
+        ></iframe>
       </div>
-      <div className="w-[350px] p-4 rounded-lg bg-gray-50">
+      <div className="w-[350px] flex flex-col gap-2 p-4 rounded-lg bg-gray-50">
         <StatsCard />
+        <StatsSegments />
       </div>
     </div>
   );

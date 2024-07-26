@@ -1,79 +1,69 @@
 import { useState } from "react";
-import { Group, Code } from "@mantine/core";
+import { Center, Tooltip, UnstyledButton, Stack, rem } from "@mantine/core";
 import {
-  IconBellRinging,
+  IconHome2,
+  IconGauge,
+  IconDeviceDesktopAnalytics,
   IconFingerprint,
-  IconKey,
+  IconCalendarStats,
+  IconUser,
   IconSettings,
-  Icon2fa,
-  IconDatabaseImport,
-  IconReceipt2,
-  IconSwitchHorizontal,
   IconLogout,
+  IconSwitchHorizontal,
 } from "@tabler/icons-react";
 // import { MantineLogo } from "@mantinex/mantine-logo";
 import classes from "./NavbarSimpleColored.module.css";
 
-const data = [
-  { link: "", label: "Notifications", icon: IconBellRinging },
-  { link: "", label: "Billing", icon: IconReceipt2 },
-  { link: "", label: "Security", icon: IconFingerprint },
-  { link: "", label: "SSH Keys", icon: IconKey },
-  { link: "", label: "Databases", icon: IconDatabaseImport },
-  { link: "", label: "Authentication", icon: Icon2fa },
-  { link: "", label: "Other Settings", icon: IconSettings },
+function NavbarLink({ icon: Icon, label, active, onClick }) {
+  return (
+    <Tooltip label={label} position="right" transitionProps={{ duration: 0 }}>
+      <UnstyledButton
+        onClick={onClick}
+        className={classes.link}
+        data-active={active || undefined}
+      >
+        <Icon style={{ width: rem(20), height: rem(20) }} stroke={1.5} />
+      </UnstyledButton>
+    </Tooltip>
+  );
+}
+
+const mockdata = [
+  { icon: IconHome2, label: "Home" },
+  { icon: IconGauge, label: "Dashboard" },
+  { icon: IconDeviceDesktopAnalytics, label: "Analytics" },
+  { icon: IconCalendarStats, label: "Releases" },
+  { icon: IconUser, label: "Account" },
+  { icon: IconFingerprint, label: "Security" },
+  { icon: IconSettings, label: "Settings" },
 ];
 
-export default function NavbarSimpleColored() {
-  const [active, setActive] = useState("Billing");
+export default function NavbarMinimal() {
+  const [active, setActive] = useState(2);
 
-  const links = data.map((item) => (
-    <a
-      className={classes.link}
-      data-active={item.label === active || undefined}
-      href={item.link}
-      key={item.label}
-      onClick={(event) => {
-        event.preventDefault();
-        setActive(item.label);
-      }}
-    >
-      <item.icon className={classes.linkIcon} stroke={1.5} />
-      <span>{item.label}</span>
-    </a>
+  const links = mockdata.map((link, index) => (
+    <NavbarLink
+      {...link}
+      key={link.label}
+      active={index === active}
+      onClick={() => setActive(index)}
+    />
   ));
 
   return (
     <nav className={classes.navbar}>
+      <Center>{/* <MantineLogo type="mark" size={30} /> */}</Center>
+
       <div className={classes.navbarMain}>
-        {/* <Group className={classes.header} justify="space-between">
-          <MantineLogo size={28} inverted style={{ color: "white" }} />
-          <Code fw={700} className={classes.version}>
-            v3.1.2
-          </Code>
-        </Group> */}
-        {links}
+        <Stack justify="center" gap={0}>
+          {links}
+        </Stack>
       </div>
 
-      <div className={classes.footer}>
-        <a
-          href="#"
-          className={classes.link}
-          onClick={(event) => event.preventDefault()}
-        >
-          <IconSwitchHorizontal className={classes.linkIcon} stroke={1.5} />
-          <span>Change account</span>
-        </a>
-
-        <a
-          href="#"
-          className={classes.link}
-          onClick={(event) => event.preventDefault()}
-        >
-          <IconLogout className={classes.linkIcon} stroke={1.5} />
-          <span>Logout</span>
-        </a>
-      </div>
+      <Stack justify="center" gap={0}>
+        <NavbarLink icon={IconSwitchHorizontal} label="Change account" />
+        <NavbarLink icon={IconLogout} label="Logout" />
+      </Stack>
     </nav>
   );
 }
