@@ -14,27 +14,28 @@ import NavbarSimpleColored from "./components/layout/NavbarSimpleColored";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import StatsCard from "./components/mantine/StatsCard";
 import StatsSegments from "./components/mantine/StatsSegments";
+import { DndList } from "./components/DndList";
+import { StatsRingCard } from "./components/mantine/StatsRingCard";
+import { TaskCard } from "./components/mantine/TaskCard";
+
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    // loader: rootLoader,
     children: [
       {
         path: "/",
         element: <TaskManagementAdmin />,
-        // loader: teamLoader,
+      },
+      {
+        path: "/manager",
+        element: <TaskManagementManager />,
       },
     ],
   },
 ]);
 
 function App() {
-  // if (isAuth()) {
-  //   const user = isAuth();
-  //   return <>{user.email}</>;
-  // }
-
   return (
     <MantineProvider theme={DEFAULT_THEME} withNormalizeCSS withGlobalStyles>
       <HeaderMegaMenu />
@@ -54,20 +55,24 @@ function TaskManagementAdmin() {
       <div className="p-2 max-w-[1200px] flex flex-col gap-20 overflow-x-hidden mx-auto">
         <AdminForms />
         <TableReviews />
-        <iframe
-          src="https://v2-embednotion.com/f44f4c90528846d79d31dba4b6298deb"
-          style={{
-            width: "100%",
-            height: "500px",
-            border: "2px solid #ccc",
-            borderRadius: "10px",
-            padding: "none", // Note: 'padding' should be a valid CSS value like '0px' or '0'
-          }}
-        ></iframe>
+        <div className="w-full h-[80vh]">
+          <DndList />
+        </div>
       </div>
       <div className="w-[350px] flex flex-col gap-2 p-4 rounded-lg bg-gray-50">
         <StatsCard />
         <StatsSegments />
+      </div>
+    </div>
+  );
+}
+
+function TaskManagementManager() {
+  return (
+    <div className="">
+      <div className="flex gap-2 ">
+        <StatsRingCard />
+        <TaskCard />
       </div>
     </div>
   );
@@ -180,9 +185,9 @@ function AdminForms() {
                 className="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:bg-gray-50"
               >
                 <option value="">Choose</option>
-                <option value="">State01</option>
-                <option value="">State02</option>
-                <option value="">State03</option>
+                <option value="State01">State01</option>
+                <option value="State02">State02</option>
+                <option value="State03">State03</option>
               </select>
             </div>
             <div className="col-span-2">
