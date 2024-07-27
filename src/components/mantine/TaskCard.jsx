@@ -9,6 +9,7 @@ import {
 } from "@mantine/core";
 // import { MantineLogo } from "@mantinex/mantine-logo";
 import { IconUpload } from "@tabler/icons-react";
+import { Link } from "react-router-dom";
 
 const avatars = [
   "https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-2.png",
@@ -17,6 +18,7 @@ const avatars = [
 ];
 
 export function TaskCard() {
+  const id = 1;
   return (
     <Card withBorder padding="lg" radius="md">
       <Group justify="space-between">
@@ -48,9 +50,14 @@ export function TaskCard() {
           <Avatar src={avatars[2]} radius="xl" />
           <Avatar radius="xl">+5</Avatar>
         </Avatar.Group>
-        <ActionIcon variant="default" size="lg" radius="md">
-          <IconUpload size="1.1rem" />
-        </ActionIcon>
+        <div className="flex items-center gap-2">
+          <Link to={`/workshop?${id}`}>
+            <Badge>view </Badge>
+          </Link>
+          <ActionIcon variant="default" size="lg" radius="md">
+            <IconUpload size="1.1rem" />
+          </ActionIcon>
+        </div>
       </Group>
     </Card>
   );
