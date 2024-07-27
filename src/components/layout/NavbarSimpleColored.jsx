@@ -15,9 +15,9 @@ import {
 import classes from "./NavbarSimpleColored.module.css";
 import { Link } from "react-router-dom";
 
-function NavbarLink({ icon: Icon, label, active, onClick }) {
+function NavbarLink({ icon: Icon, label, active, onClick, url }) {
   return (
-    <Link>
+    <Link to={url}>
       <Tooltip label={label} position="right" transitionProps={{ duration: 0 }}>
         <UnstyledButton
           onClick={onClick}
@@ -34,7 +34,7 @@ function NavbarLink({ icon: Icon, label, active, onClick }) {
 const mockdata = [
   { icon: IconHome2, label: "Home", url: "/" },
   { icon: IconGauge, label: "Dashboard" },
-  { icon: IconDeviceDesktopAnalytics, label: "Analytics", url: "/" },
+  { icon: IconDeviceDesktopAnalytics, label: "Manager", url: "/manager" },
   { icon: IconCalendarStats, label: "Releases" },
   { icon: IconUser, label: "Account" },
   { icon: IconFingerprint, label: "Security" },

@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import useStore from "./store";
 import { Form, useFormik } from "formik";
 import { createTheme, MantineProvider } from "@mantine/core";
+//import '@tremor/react/dist/index.css';
+
 import isAuth, { logout } from "./auths/authUtils";
 import "@mantine/core/styles.css";
 import HeaderMegaMenu from "./components/layout/Header";
@@ -17,6 +19,7 @@ import StatsSegments from "./components/mantine/StatsSegments";
 import { DndList } from "./components/DndList";
 import { StatsRingCard } from "./components/mantine/StatsRingCard";
 import { TaskCard } from "./components/mantine/TaskCard";
+import Donut_chart from "./components/admin/Donut_chart";
 
 const router = createBrowserRouter([
   {
@@ -63,7 +66,8 @@ function TaskManagementAdmin() {
         </div>
       </div>
       <div className="w-[350px] flex flex-col gap-2 p-4 rounded-lg bg-gray-50">
-        <StatsCard />
+        <Donut_chart/>
+
       </div>
     </div>
   );
@@ -179,7 +183,7 @@ function AdminForms() {
                 htmlFor="joining_date"
                 className="mb-1 block text-sm font-medium text-gray-700"
               >
-                Joining Date
+                Workshop Date
               </label>
               <input
                 onChange={formik.handleChange}
