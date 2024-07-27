@@ -6,13 +6,12 @@ export default function WorkshopBanner() {
   return (
     <div className={classes.wrapper}>
       <div className={classes.body}>
-        <Title className={classes.title}>Wait a minute...</Title>
+        <Title className={classes.title}>Electrical Outage</Title>
         <Text fw={500} fz="lg" mb={5}>
-          Subscribe to our newsletter!
+          Sudama Nagar
         </Text>
         <Text fz="sm" c="dimmed">
-          You will never miss important product updates, latest news and
-          community QA sessions. Our newsletter is once a week, every Sunday.
+          Electrical Outage from 6pm in sector C of Sudama Nagar
         </Text>
 
         <div className={classes.controls}>

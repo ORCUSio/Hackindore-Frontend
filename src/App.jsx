@@ -59,7 +59,7 @@ function TaskManagementAdmin() {
     <div className="flex flex-wrap w-full p-2">
       <div className="p-2 max-w-[1100px] flex flex-col gap-20 overflow-x-hidden mx-auto">
         <div className="flex flex-wrap justify-between gap-20">
-          <AdminForms />
+          <StatsSegments />
           <StatsSegments />
         </div>
         <div className="w-[]">
@@ -81,7 +81,6 @@ function TaskManagementManager() {
     <div className="">
       <div className="flex flex-col gap-2 max-w-[800px] mx-auto ">
         <StatsRingCard />
-
         <TaskCard />
         <TaskCard />
         <TaskCard />
@@ -531,30 +530,23 @@ const AddCard = ({ column, setCards }) => {
 
 const DEFAULT_CARDS = [
   // BACKLOG
-  { title: "Look into render bug in dashboard", id: "1", column: "backlog" },
-  { title: "SOX compliance checklist", id: "2", column: "backlog" },
-  { title: "[SPIKE] Migrate to Azure", id: "3", column: "backlog" },
-  { title: "Document Notifications service", id: "4", column: "backlog" },
+  { title: "Investigate cause of outage", id: "1", column: "backlog" },
+  { title: "Coordinate with field technicians", id: "2", column: "backlog" },
+  { title: "Notify residents about outage", id: "3", column: "backlog" },
   // TODO
-  {
-    title: "Research DB options for new microservice",
-    id: "5",
-    column: "todo",
-  },
-  { title: "Postmortem for outage", id: "6", column: "todo" },
-  { title: "Sync with product on Q3 roadmap", id: "7", column: "todo" },
-
+  { title: "Dispatch repair team to site", id: "4", column: "todo" },
+  { title: "Ensure safety measures are in place", id: "5", column: "todo" },
+  { title: "Update status on public portal", id: "6", column: "todo" },
   // DOING
-  {
-    title: "Refactor context providers to use Zustand",
-    id: "8",
-    column: "doing",
-  },
-  { title: "Add logging to daily CRON", id: "9", column: "doing" },
+  { title: "Repair damaged lines", id: "7", column: "doing" },
+  { title: "Monitor system for further issues", id: "8", column: "doing" },
   // DONE
+  { title: "Restore power to affected areas", id: "9", column: "done" },
   {
-    title: "Set up DD dashboards for Lambda listener",
+    title: "Send confirmation of resolution to residents",
     id: "10",
     column: "done",
   },
 ];
+
+export { DEFAULT_CARDS };
