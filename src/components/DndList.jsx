@@ -1,18 +1,61 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FiPlus, FiTrash } from "react-icons/fi";
 import { motion } from "framer-motion";
 import { FaFire } from "react-icons/fa";
+import axios from "axios";
+
+const mapApiPercentageToColumn = (percentage) => {
+  if (percentage === 0) {
+    return "backlog";
+  } else if (percentage > 0 && percentage <= 33) {
+    return "todo";
+  } else if (percentage > 33 && percentage <= 66) {
+    return "doing";
+  } else {
+    return "done";
+  }
+};
+
+const mapColumnToPercentage = (column) => {
+  switch (column) {
+    case "backlog":
+      return 0;
+    case "todo":
+      return 20;
+    case "doing":
+      return 50;
+    case "done":
+      return 100;
+    default:
+      return 0;
+  }
+};
+
+const convertApiDataToCards = (apiData) => {
+  return apiData.map((task) => ({
+    title: task.task_name,
+    id: task.task_id.toString(),
+    column: mapApiPercentageToColumn(task.percentage),
+  }));
+};
 
 export const CustomKanban = () => {
   return (
     <div className="h-screen w-full bg-neutral-900 text-neutral-50">
-      <Board />
+      <DndList />
     </div>
   );
 };
 
 export const DndList = () => {
-  const [cards, setCards] = useState(DEFAULT_CARDS);
+  const [cards, setCards] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:8080/tasks").then((response) => {
+      const cards = convertApiDataToCards(response.data);
+      setCards(cards);
+    });
+  }, []);
 
   return (
     <div className="flex h-full w-full gap-3 overflow-scroll p-12">
@@ -56,7 +99,7 @@ const Column = ({ title, headingColor, cards, column, setCards }) => {
     e.dataTransfer.setData("cardId", card.id);
   };
 
-  const handleDragEnd = (e) => {
+  const handleDragEnd = async (e) => {
     const cardId = e.dataTransfer.getData("cardId");
 
     setActive(false);
@@ -88,6 +131,15 @@ const Column = ({ title, headingColor, cards, column, setCards }) => {
       }
 
       setCards(copy);
+
+      const newPercentage = mapColumnToPercentage(column);
+      try {
+        await axios.put(`http://localhost:8080/${cardId}/progress`, {
+          percentage: newPercentage,
+        });
+      } catch (error) {
+        console.error("Failed to update task progress", error);
+      }
     }
   };
 
@@ -183,12 +235,11 @@ const Card = ({ title, id, column, handleDragStart }) => {
       <DropIndicator beforeId={id} column={column} />
       <motion.div
         layout
-        layoutId={id}
+        className="mt-1.5 w-full cursor-pointer rounded bg-neutral-800 p-3 shadow-md"
         draggable="true"
-        onDragStart={(e) => handleDragStart(e, { title, id, column })}
-        className="cursor-grab rounded border border-neutral-700 bg-neutral-800 p-3 active:cursor-grabbing"
+        onDragStart={(e) => handleDragStart(e, { id, title, column })}
       >
-        <p className="text-sm text-neutral-100">{title}</p>
+        <p className="text-sm">{title}</p>
       </motion.div>
     </>
   );
@@ -197,9 +248,9 @@ const Card = ({ title, id, column, handleDragStart }) => {
 const DropIndicator = ({ beforeId, column }) => {
   return (
     <div
-      data-before={beforeId || "-1"}
+      data-before={beforeId}
       data-column={column}
-      className="my-0.5 h-0.5 w-full bg-violet-400 opacity-0"
+      className="h-6 w-full rounded bg-violet-400/20 opacity-0 transition-opacity"
     />
   );
 };
@@ -209,6 +260,7 @@ const BurnBarrel = ({ setCards }) => {
 
   const handleDragOver = (e) => {
     e.preventDefault();
+
     setActive(true);
   };
 
@@ -216,26 +268,26 @@ const BurnBarrel = ({ setCards }) => {
     setActive(false);
   };
 
-  const handleDragEnd = (e) => {
+  const handleDrop = (e) => {
     const cardId = e.dataTransfer.getData("cardId");
 
-    setCards((pv) => pv.filter((c) => c.id !== cardId));
-
     setActive(false);
+
+    setCards((pv) => pv.filter((c) => c.id !== cardId));
   };
 
   return (
     <div
-      onDrop={handleDragEnd}
+      onDrop={handleDrop}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
-      className={`mt-10 grid h-56 w-56 shrink-0 place-content-center rounded border text-3xl ${
-        active
-          ? "border-red-800 bg-red-800/20 text-red-500"
-          : "border-neutral-500 bg-neutral-500/20 text-neutral-500"
+      className={`mt-12 h-12 w-12 shrink-0 rounded bg-neutral-800 shadow-md transition-all ${
+        active ? "scale-110 bg-red-500" : ""
       }`}
     >
-      {active ? <FaFire className="animate-bounce" /> : <FiTrash />}
+      <div className="flex h-full w-full items-center justify-center text-red-400">
+        <FiTrash />
+      </div>
     </div>
   );
 };
@@ -299,33 +351,3 @@ const AddCard = ({ column, setCards }) => {
     </>
   );
 };
-
-const DEFAULT_CARDS = [
-  // BACKLOG
-  { title: "Look into render bug in dashboard", id: "1", column: "backlog" },
-  { title: "SOX compliance checklist", id: "2", column: "backlog" },
-  { title: "[SPIKE] Migrate to Azure", id: "3", column: "backlog" },
-  { title: "Document Notifications service", id: "4", column: "backlog" },
-  // TODO
-  {
-    title: "Research DB options for new microservice",
-    id: "5",
-    column: "todo",
-  },
-  { title: "Postmortem for outage", id: "6", column: "todo" },
-  { title: "Sync with product on Q3 roadmap", id: "7", column: "todo" },
-
-  // DOING
-  {
-    title: "Refactor context providers to use Zustand",
-    id: "8",
-    column: "doing",
-  },
-  { title: "Add logging to daily CRON", id: "9", column: "doing" },
-  // DONE
-  {
-    title: "Set up DD dashboards for Lambda listener",
-    id: "10",
-    column: "done",
-  },
-];
