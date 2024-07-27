@@ -1,85 +1,66 @@
 import { Table, Progress, Anchor, Text, Group } from "@mantine/core";
 import classes from "./TableReviews.module.css";
 
+// Updated mock data
 const data = [
   {
-    title: "Foundation",
-    author: "Isaac Asimov",
-    year: 1951,
-    reviews: { positive: 2223, negative: 259 },
+    emp_id: 1,
+    emp_name: "Rajesh Kumar",
+    role: "Laborer",
+    total_workedhours: 150, // Example value
+    required_working_hours: 200, // Example value
+    joining_date: "2024-01-15",
   },
   {
-    title: "Frankenstein",
-    author: "Mary Shelley",
-    year: 1818,
-    reviews: { positive: 5677, negative: 1265 },
+    emp_id: 2,
+    emp_name: "Sita Devi",
+    role: "Foreman",
+    total_workedhours: 180, // Example value
+    required_working_hours: 220, // Example value
+    joining_date: "2023-11-20",
   },
   {
-    title: "Solaris",
-    author: "Stanislaw Lem",
-    year: 1961,
-    reviews: { positive: 3487, negative: 1845 },
+    emp_id: 3,
+    emp_name: "Amit Sharma",
+    role: "Supervisor",
+    total_workedhours: 210, // Example value
+    required_working_hours: 250, // Example value
+    joining_date: "2023-08-05",
   },
   {
-    title: "Dune",
-    author: "Frank Herbert",
-    year: 1965,
-    reviews: { positive: 8576, negative: 663 },
-  },
-  {
-    title: "The Left Hand of Darkness",
-    author: "Ursula K. Le Guin",
-    year: 1969,
-    reviews: { positive: 6631, negative: 993 },
-  },
-  {
-    title: "A Scanner Darkly",
-    author: "Philip K Dick",
-    year: 1977,
-    reviews: { positive: 8124, negative: 1847 },
+    emp_id: 4,
+    emp_name: "Meena Kumari",
+    role: "Manager",
+    total_workedhours: 190, // Example value
+    required_working_hours: 200, // Example value
+    joining_date: "2022-12-01",
   },
 ];
 
 export default function TableReviews() {
   const rows = data.map((row) => {
-    const totalReviews = row.reviews.negative + row.reviews.positive;
-    const positiveReviews = (row.reviews.positive / totalReviews) * 100;
-    const negativeReviews = (row.reviews.negative / totalReviews) * 100;
+    const percentageCompleted =
+      (row.total_workedhours / row.required_working_hours) * 100;
 
     return (
-      <Table.Tr key={row.title}>
+      <Table.Tr key={row.emp_id}>
+        <Table.Td>{row.emp_id}</Table.Td>
+        <Table.Td>{row.emp_name}</Table.Td>
+        <Table.Td>{row.role}</Table.Td>
         <Table.Td>
-          <Anchor component="button" fz="sm">
-            {row.title}
-          </Anchor>
+          {row.total_workedhours} / {row.required_working_hours} hours
         </Table.Td>
-        <Table.Td>{row.year}</Table.Td>
-        <Table.Td>
-          <Anchor component="button" fz="sm">
-            {row.author}
-          </Anchor>
-        </Table.Td>
-        <Table.Td>{Intl.NumberFormat().format(totalReviews)}</Table.Td>
         <Table.Td>
           <Group justify="space-between">
             <Text fz="xs" c="teal" fw={700}>
-              {positiveReviews.toFixed(0)}%
-            </Text>
-            <Text fz="xs" c="red" fw={700}>
-              {negativeReviews.toFixed(0)}%
+              {percentageCompleted.toFixed(0)}%
             </Text>
           </Group>
           <Progress.Root>
             <Progress.Section
               className={classes.progressSection}
-              value={positiveReviews}
+              value={percentageCompleted}
               color="teal"
-            />
-
-            <Progress.Section
-              className={classes.progressSection}
-              value={negativeReviews}
-              color="red"
             />
           </Progress.Root>
         </Table.Td>
@@ -92,11 +73,11 @@ export default function TableReviews() {
       <Table verticalSpacing="xs">
         <Table.Thead>
           <Table.Tr>
-            <Table.Th>Book title</Table.Th>
-            <Table.Th>Year</Table.Th>
-            <Table.Th>Author</Table.Th>
-            <Table.Th>Reviews</Table.Th>
-            <Table.Th>Reviews distribution</Table.Th>
+            <Table.Th>Employee ID</Table.Th>
+            <Table.Th>Employee Name</Table.Th>
+            <Table.Th>Role</Table.Th>
+            <Table.Th>Worked / Required Hours</Table.Th>
+            <Table.Th>Progress</Table.Th>
           </Table.Tr>
         </Table.Thead>
         <Table.Tbody>{rows}</Table.Tbody>

@@ -53,7 +53,10 @@ function TaskManagementAdmin() {
   return (
     <div className="flex flex-wrap w-full p-2">
       <div className="p-2 max-w-[1200px] flex flex-col gap-20 overflow-x-hidden mx-auto">
-        <AdminForms />
+        <div className="flex flex-wrap justify-between">
+          <AdminForms />
+          <StatsSegments />
+        </div>
         <TableReviews />
         <div className="w-full h-[80vh]">
           <DndList />
@@ -61,7 +64,6 @@ function TaskManagementAdmin() {
       </div>
       <div className="w-[350px] flex flex-col gap-2 p-4 rounded-lg bg-gray-50">
         <StatsCard />
-        <StatsSegments />
       </div>
     </div>
   );
@@ -70,8 +72,11 @@ function TaskManagementAdmin() {
 function TaskManagementManager() {
   return (
     <div className="">
-      <div className="flex gap-2 ">
+      <div className="gap-2 ">
         <StatsRingCard />
+        <TaskCard />
+        <TaskCard />
+        <TaskCard />
         <TaskCard />
       </div>
     </div>
@@ -84,19 +89,18 @@ function AdminForms() {
   const store = useStore();
   const formik = useFormik({
     initialValues: {
-      email: "",
-      password: "",
-      address: "",
-      city: "",
-      state: "",
-      zip: "",
-      remember: false,
+      emp_id: "",
+      emp_name: "",
+      role: "",
+      total_workedhours: 0,
+      joining_date: "",
     },
 
     onSubmit: (values) => {
-      localStorage.setItem("user", JSON.stringify(values));
+      localStorage.setItem("employee", JSON.stringify(values));
     },
   });
+
   return (
     <>
       <div className="mx-auto max-w-xl">
@@ -104,129 +108,92 @@ function AdminForms() {
           <div className="grid grid-cols-12 gap-5">
             <div className="col-span-6">
               <label
-                htmlFor="email"
+                htmlFor="emp_id"
                 className="mb-1 block text-sm font-medium text-gray-700"
               >
-                Email
+                Employee ID
               </label>
               <input
                 onChange={formik.handleChange}
-                value={formik.values.email}
-                type="email"
-                id="email"
-                name="email"
+                value={formik.values.emp_id}
+                type="text"
+                id="emp_id"
+                name="emp_id"
                 className="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-400 focus:ring focus:ring-primary-200 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500"
-                placeholder="you@email.com"
+                placeholder="Enter employee ID"
               />
             </div>
             <div className="col-span-6">
               <label
-                htmlFor="password"
+                htmlFor="emp_name"
                 className="mb-1 block text-sm font-medium text-gray-700"
               >
-                Password
+                Employee Name
               </label>
               <input
                 onChange={formik.handleChange}
-                value={formik.values.password}
-                name="password"
-                type="password"
-                id="password"
-                className="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-400 focus:ring focus:ring-primary-200 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500"
-                placeholder="you@email.com"
-              />
-            </div>
-            <div className="col-span-12">
-              <label
-                htmlFor="address"
-                className="mb-1 block text-sm font-medium text-gray-700"
-              >
-                Address
-              </label>
-              <input
-                onChange={formik.handleChange}
-                value={formik.values.address}
-                name="address"
+                value={formik.values.emp_name}
+                name="emp_name"
                 type="text"
-                id="address"
+                id="emp_name"
                 className="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-400 focus:ring focus:ring-primary-200 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500"
-                placeholder="1864 Main Street"
+                placeholder="Enter employee name"
               />
             </div>
             <div className="col-span-6">
               <label
-                htmlFor="city"
+                htmlFor="role"
                 className="mb-1 block text-sm font-medium text-gray-700"
               >
-                City
+                Role
               </label>
               <input
                 onChange={formik.handleChange}
-                value={formik.values.city}
-                name="city"
+                value={formik.values.role}
+                name="role"
                 type="text"
-                id="city"
+                id="role"
                 className="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-400 focus:ring focus:ring-primary-200 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500"
-                placeholder=""
+                placeholder="Enter role"
               />
             </div>
-            <div className="col-span-4">
+            <div className="col-span-6">
               <label
-                htmlFor="state"
+                htmlFor="total_workedhours"
                 className="mb-1 block text-sm font-medium text-gray-700"
               >
-                State
-              </label>
-              <select
-                onChange={formik.handleChange}
-                value={formik.values.state}
-                name="state"
-                id="state"
-                className="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:bg-gray-50"
-              >
-                <option value="">Choose</option>
-                <option value="State01">State01</option>
-                <option value="State02">State02</option>
-                <option value="State03">State03</option>
-              </select>
-            </div>
-            <div className="col-span-2">
-              <label
-                htmlFor="zip"
-                className="mb-1 block text-sm font-medium text-gray-700"
-              >
-                Zip
+                Total Worked Hours
               </label>
               <input
                 onChange={formik.handleChange}
-                value={formik.values.zip}
-                name="zip"
-                type="text"
-                id="zip"
+                value={formik.values.total_workedhours}
+                name="total_workedhours"
+                type="number"
+                id="total_workedhours"
                 className="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-400 focus:ring focus:ring-primary-200 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500"
-                placeholder=""
+                placeholder="Enter total worked hours"
               />
             </div>
-            <div className="col-span-12 flex items-center space-x-2">
+            <div className="col-span-6">
+              <label
+                htmlFor="joining_date"
+                className="mb-1 block text-sm font-medium text-gray-700"
+              >
+                Joining Date
+              </label>
               <input
                 onChange={formik.handleChange}
-                value={formik.values.remember}
-                name="remember"
-                type="checkbox"
-                id="remember"
-                className="h-4 w-4 rounded border-gray-300 text-primary-600 shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 focus:ring-offset-0 disabled:cursor-not-allowed disabled:text-gray-400"
+                value={formik.values.joining_date}
+                name="joining_date"
+                type="date"
+                id="joining_date"
+                className="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-400 focus:ring focus:ring-primary-200 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500"
               />
-              <label
-                htmlFor="remember"
-                className="text-sm font-medium text-gray-700"
-              >
-                Remember me
-              </label>
             </div>
             <div className="col-span-12">
               <button
                 type="submit"
-                className="rounded-lg border border-primary-500 bg-primary-500 px-5 py-2.5 text-center text-sm font-medium text-white shadow-sm transition-all hover:border-primary-700 hover:bg-primary-700 focus:ring focus:ring-primary-200 disabled:cursor-not-allowed disabled:border-primary-300 disabled:bg-primary-300"
+                className="rounded-lg border border-primary-500 bg-primary-500 px-5 py-2.5 text-center text-sm font-medium bg-blue-400 text-white shadow-sm transition-all hover:border-primary-700 hover:bg-primary-700 focus:ring focus:ring-primary-200 disabled:cursor-not-allowed disabled:border-primary-300 disabled:bg-primary-300"
               >
                 Submit
               </button>

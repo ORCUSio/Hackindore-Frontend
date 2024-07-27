@@ -134,7 +134,7 @@ const Column = ({ title, headingColor, cards, column, setCards }) => {
 
       const newPercentage = mapColumnToPercentage(column);
       try {
-        await axios.put(`http://localhost:8080/${cardId}/progress`, {
+        await axios.put(`http://localhost:8080/tasks/${cardId}/progress`, {
           percentage: newPercentage,
         });
       } catch (error) {
@@ -235,7 +235,7 @@ const Card = ({ title, id, column, handleDragStart }) => {
       <DropIndicator beforeId={id} column={column} />
       <motion.div
         layout
-        className="mt-1.5 w-full cursor-pointer rounded bg-neutral-800 p-3 shadow-md"
+        className="mt-1.5 w-full cursor-pointer rounded  p-3 shadow-md"
         draggable="true"
         onDragStart={(e) => handleDragStart(e, { id, title, column })}
       >

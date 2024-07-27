@@ -13,25 +13,28 @@ import {
 } from "@tabler/icons-react";
 // import { MantineLogo } from "@mantinex/mantine-logo";
 import classes from "./NavbarSimpleColored.module.css";
+import { Link } from "react-router-dom";
 
 function NavbarLink({ icon: Icon, label, active, onClick }) {
   return (
-    <Tooltip label={label} position="right" transitionProps={{ duration: 0 }}>
-      <UnstyledButton
-        onClick={onClick}
-        className={classes.link}
-        data-active={active || undefined}
-      >
-        <Icon style={{ width: rem(20), height: rem(20) }} stroke={1.5} />
-      </UnstyledButton>
-    </Tooltip>
+    <Link>
+      <Tooltip label={label} position="right" transitionProps={{ duration: 0 }}>
+        <UnstyledButton
+          onClick={onClick}
+          className={classes.link}
+          data-active={active || undefined}
+        >
+          <Icon style={{ width: rem(20), height: rem(20) }} stroke={1.5} />
+        </UnstyledButton>
+      </Tooltip>
+    </Link>
   );
 }
 
 const mockdata = [
-  { icon: IconHome2, label: "Home" },
+  { icon: IconHome2, label: "Home", url: "/" },
   { icon: IconGauge, label: "Dashboard" },
-  { icon: IconDeviceDesktopAnalytics, label: "Analytics" },
+  { icon: IconDeviceDesktopAnalytics, label: "Analytics", url: "/" },
   { icon: IconCalendarStats, label: "Releases" },
   { icon: IconUser, label: "Account" },
   { icon: IconFingerprint, label: "Security" },
