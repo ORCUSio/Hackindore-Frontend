@@ -36,6 +36,26 @@ const router = createBrowserRouter([
         path: "/workshop",
         element: <TaskManagementWorkshop />,
       },
+      {
+        path: "/complaints",
+        element: <TableSelection mocks={Scheduling} />,
+      },
+      {
+        path: "/equipments",
+        element: <TableSelection mocks={Equipment} />,
+      },
+      {
+        path: "/pendings",
+        element: <TableSelection mocks={Pendings} />,
+      },
+      {
+        path: "/Profits",
+        element: <TableSelection mocks={Profits} />,
+      },
+      {
+        path: "/Reports",
+        element: <TableSelection />,
+      },
     ],
   },
 ]);
@@ -45,7 +65,7 @@ function App() {
     <MantineProvider theme={DEFAULT_THEME} withNormalizeCSS withGlobalStyles>
       <HeaderMegaMenu />
       <div className="flex h-[100vh] overflow-hidden">
-        <NavbarSimpleColored />
+        <NavbarSearch />
         <div className="overflow-y-auto w-full">
           <Outlet />
         </div>
@@ -72,6 +92,63 @@ function TaskManagementAdmin() {
     { date: "Feb 22", FuelUsage: 2756, MaintenanceCost: 2103 },
     // ...other months
   ];
+  const workOrderData = [
+    { date: "Jan 22", Completed: 40, Pending: 20 },
+    { date: "Feb 22", Completed: 35, Pending: 25 },
+    { date: "Mar 22", Completed: 45, Pending: 15 },
+    { date: "Apr 22", Completed: 50, Pending: 10 },
+    { date: "May 22", Completed: 55, Pending: 5 },
+    { date: "Jun 22", Completed: 60, Pending: 0 },
+    { date: "Jul 22", Completed: 50, Pending: 10 },
+    { date: "Aug 22", Completed: 45, Pending: 15 },
+    { date: "Sep 22", Completed: 40, Pending: 20 },
+    { date: "Oct 22", Completed: 55, Pending: 5 },
+    { date: "Nov 22", Completed: 60, Pending: 0 },
+    { date: "Dec 22", Completed: 65, Pending: 0 },
+  ];
+  const workOrderTotal = workOrderData.reduce(
+    (sum, month) => sum + month.Completed + month.Pending,
+    0
+  );
+  const workingHoursData = [
+    { date: "Jan 22", Electrician: 150, Construction: 200, Maintenance: 100 },
+    { date: "Feb 22", Electrician: 160, Construction: 210, Maintenance: 110 },
+    { date: "Mar 22", Electrician: 170, Construction: 220, Maintenance: 120 },
+    { date: "Apr 22", Electrician: 180, Construction: 230, Maintenance: 130 },
+    { date: "May 22", Electrician: 190, Construction: 240, Maintenance: 140 },
+    { date: "Jun 22", Electrician: 200, Construction: 250, Maintenance: 150 },
+    { date: "Jul 22", Electrician: 210, Construction: 260, Maintenance: 160 },
+    { date: "Aug 22", Electrician: 220, Construction: 270, Maintenance: 170 },
+    { date: "Sep 22", Electrician: 230, Construction: 280, Maintenance: 180 },
+    { date: "Oct 22", Electrician: 240, Construction: 290, Maintenance: 190 },
+    { date: "Nov 22", Electrician: 250, Construction: 300, Maintenance: 200 },
+    { date: "Dec 22", Electrician: 260, Construction: 310, Maintenance: 210 },
+  ];
+  const workingHoursTotal = workingHoursData.reduce(
+    (sum, month) =>
+      sum + month.Electrician + month.Construction + month.Maintenance,
+    0
+  );
+  const fuelConsumptionData = [
+    { date: "Jan 22", Vehicles: 500, Machinery: 300 },
+    { date: "Feb 22", Vehicles: 520, Machinery: 320 },
+    { date: "Mar 22", Vehicles: 540, Machinery: 340 },
+    { date: "Apr 22", Vehicles: 560, Machinery: 360 },
+    { date: "May 22", Vehicles: 580, Machinery: 380 },
+    { date: "Jun 22", Vehicles: 600, Machinery: 400 },
+    { date: "Jul 22", Vehicles: 620, Machinery: 420 },
+    { date: "Aug 22", Vehicles: 640, Machinery: 440 },
+    { date: "Sep 22", Vehicles: 660, Machinery: 460 },
+    { date: "Oct 22", Vehicles: 680, Machinery: 480 },
+    { date: "Nov 22", Vehicles: 700, Machinery: 500 },
+    { date: "Dec 22", Vehicles: 720, Machinery: 520 },
+  ];
+
+  const fuelConsumptionTotal = fuelConsumptionData.reduce(
+    (sum, month) => sum + month.Vehicles + month.Machinery,
+    0
+  );
+
   return (
     <div className="flex flex-wrap w-full p-2">
       <div className="p-2 max-w-[1100px] flex flex-col gap-20 overflow-x-hidden mx-auto">
@@ -90,9 +167,27 @@ function TaskManagementAdmin() {
             categories={["FuelUsage", "MaintenanceCost"]}
             colors={["indigo", "cyan"]}
           />
-          <AreaChartHero />
-          <AreaChartHero />
-          <AreaChartHero />
+          <AreaChartHero
+            title="Work Order Completion"
+            total={workOrderTotal}
+            chartData={workOrderData}
+            categories={["Completed", "Pending"]}
+            colors={["green", "red"]}
+          />
+          <AreaChartHero
+            title="Employee Working Hours"
+            total={workingHoursTotal}
+            chartData={workingHoursData}
+            categories={["Electrician", "Construction", "Maintenance"]}
+            colors={["blue", "orange", "purple"]}
+          />
+          <AreaChartHero
+            title="Fuel Consumption"
+            total={fuelConsumptionTotal}
+            chartData={fuelConsumptionData}
+            categories={["Vehicles", "Machinery"]}
+            colors={["red", "yellow"]}
+          />
         </div>
       </div>
     </div>
@@ -288,6 +383,9 @@ import { FaFire } from "react-icons/fa";
 import { UserButton, UserDetails } from "./components/mantine/UserButton";
 import { TableSort } from "./components/mantine/TableSort";
 import { AreaChartHero } from "./components/admin/AreaChartHero";
+import { NavbarSearch } from "./components/mantine/NavbarSearch";
+import { TableSelection } from "./components/mantine/TableSelection";
+import { Equipment, Pendings, Profits, Scheduling } from "./assets/data";
 
 export const DummyKanban = () => {
   return (

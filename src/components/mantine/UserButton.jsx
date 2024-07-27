@@ -1,4 +1,4 @@
-import { UnstyledButton, Group, Avatar, Text, rem } from "@mantine/core";
+import { UnstyledButton, Group, Text, rem } from "@mantine/core";
 import { IconChevronRight } from "@tabler/icons-react";
 import classes from "./UserButton.module.css";
 
@@ -6,8 +6,7 @@ export function UserButton({ user, onClick }) {
   return (
     <UnstyledButton className={classes.user} onClick={onClick}>
       <Group>
-        <Avatar src={user.avatar} radius="xl" />
-
+        {/* <Avatar src={user.avatar} radius="xl" /> */}
         <div style={{ flex: 1 }}>
           <Text size="sm" fw={500}>
             {user.name}
@@ -17,7 +16,6 @@ export function UserButton({ user, onClick }) {
             {user.email}
           </Text>
         </div>
-
         <IconChevronRight
           style={{ width: rem(14), height: rem(14) }}
           stroke={1.5}
@@ -33,7 +31,7 @@ export function UserDetails({ user }) {
   return (
     <div className="flex gap-2">
       <div className="w-36">
-        <Image src={user.avatar} alt={user.name} />
+        {/* <Image src={user.avatar} alt={user.name} /> */}
       </div>
       <div>
         <Text size="lg" weight={500}>
