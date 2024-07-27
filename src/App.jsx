@@ -16,7 +16,7 @@ import StatsCard from "./components/mantine/StatsCard";
 import StatsSegments from "./components/mantine/StatsSegments";
 import { DndList } from "./components/DndList";
 import { StatsRingCard } from "./components/mantine/StatsRingCard";
-import { TaskCard } from "./components/mantine/TaskCard";
+import { TaskCard, TaskCardList } from "./components/mantine/TaskCard";
 import WorkshopBanner from "./components/mantine/WorkshopBanner";
 
 const router = createBrowserRouter([
@@ -81,25 +81,44 @@ function TaskManagementManager() {
     <div className="">
       <div className="flex flex-col gap-2 max-w-[800px] mx-auto ">
         <StatsRingCard />
-        <TaskCard />
-        <TaskCard />
-        <TaskCard />
-        <TaskCard />
+        <TaskCardList />
       </div>
     </div>
   );
 }
 
+const users = [
+  {
+    id: 1,
+    name: "Harriette Spoonlicker",
+    email: "hspoonlicker@outlook.com",
+    avatar:
+      "https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-8.png",
+  },
+  // Add more user objects here as needed
+];
+
 function TaskManagementWorkshop() {
+  const [selectedUser, setSelectedUser] = useState(null);
+
+  const handleUserClick = (user) => {
+    setSelectedUser(user);
+  };
   return (
     <div>
       <WorkshopBanner />
       <DummyKanban />
-      <div className="p-[64px]">
-        <UserButton />
-        <UserButton />
-        <UserButton />
-        <UserButton />
+      <div className="user-buttons">
+        {users.map((user) => (
+          <UserButton
+            key={user.id}
+            user={user}
+            onClick={() => handleUserClick(user)}
+          />
+        ))}
+      </div>
+      <div className="user-details">
+        {selectedUser && <UserDetails user={selectedUser} />}
       </div>
     </div>
   );

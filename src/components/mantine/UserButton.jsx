@@ -2,22 +2,19 @@ import { UnstyledButton, Group, Avatar, Text, rem } from "@mantine/core";
 import { IconChevronRight } from "@tabler/icons-react";
 import classes from "./UserButton.module.css";
 
-export function UserButton() {
+export function UserButton({ user, onClick }) {
   return (
-    <UnstyledButton className={classes.user}>
+    <UnstyledButton className={classes.user} onClick={onClick}>
       <Group>
-        <Avatar
-          src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-8.png"
-          radius="xl"
-        />
+        <Avatar src={user.avatar} radius="xl" />
 
         <div style={{ flex: 1 }}>
           <Text size="sm" fw={500}>
-            Harriette Spoonlicker
+            {user.name}
           </Text>
 
           <Text c="dimmed" size="xs">
-            hspoonlicker@outlook.com
+            {user.email}
           </Text>
         </div>
 
@@ -27,5 +24,23 @@ export function UserButton() {
         />
       </Group>
     </UnstyledButton>
+  );
+}
+
+import { Card, Image } from "@mantine/core";
+
+export function UserDetails({ user }) {
+  return (
+    <Card shadow="sm" padding="lg">
+      <Card.Section>
+        <Image src={user.avatar} height={160} alt={user.name} />
+      </Card.Section>
+      <Text size="lg" weight={500}>
+        {user.name}
+      </Text>
+      <Text size="sm" color="dimmed">
+        {user.email}
+      </Text>
+    </Card>
   );
 }
