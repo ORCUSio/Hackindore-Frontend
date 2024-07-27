@@ -1,19 +1,13 @@
-import {
-  Progress,
-  Box,
-  Text,
-  Group,
-  Paper,
-  SimpleGrid,
-  rem,
-} from "@mantine/core";
-import { IconArrowUpRight, IconDeviceAnalytics } from "@tabler/icons-react";
-import classes from "./StatsSegments.module.css";
+import React from 'react';
+import { Progress, Box, Text, Group, Paper, SimpleGrid, rem } from '@mantine/core';
+import { IconArrowUpRight, IconDeviceAnalytics } from '@tabler/icons-react';
 
 const data = [
-  { label: "Mobile", count: "204,001", part: 59, color: "#47d6ab" },
-  { label: "Desktop", count: "121,017", part: 35, color: "#03141a" },
-  { label: "Tablet", count: "31,118", part: 6, color: "#4fcdf7" },
+  { label: 'Allocated Fund', count: '$5000', part: 100, color: '#47d6ab' },
+  { label: 'Workers Expense', count: '$2000', part: 40, color: '#03141a' },
+  { label: 'Resources Expense', count: '$1500', part: 30, color: '#4fcdf7' },
+  { label: 'Miscellaneous Expense', count: '$1000', part: 20, color: '#f78e47' },
+  { label: 'Remaining Fund', count: '$500', part: 10, color: '#f74f78' },
 ];
 
 export default function StatsSegments() {
@@ -30,57 +24,51 @@ export default function StatsSegments() {
   const descriptions = data.map((stat) => (
     <Box
       key={stat.label}
-      style={{ borderBottomColor: stat.color }}
-      className={classes.stat}
+      style={{
+        borderBottomColor: stat.color,
+        paddingBottom: '0.5rem',
+        marginBottom: '0.5rem',
+        borderBottomWidth: '2px',
+        borderBottomStyle: 'solid',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+      }}
     >
-      <Text tt="uppercase" fz="xs" c="dimmed" fw={700}>
+      <Text transform="uppercase" size="xs" color="dimmed" weight={700}>
         {stat.label}
       </Text>
-
-      <Group justify="space-between" align="flex-end" gap={0}>
-        <Text fw={700}>{stat.count}</Text>
-        <Text c={stat.color} fw={700} size="sm" className={classes.statCount}>
+      <Box style={{ textAlign: 'right' }}>
+        <Text weight={700} style={{ fontSize: '1rem' }}>{stat.count}</Text>
+        <Text color={stat.color} weight={700} size="sm">
           {stat.part}%
         </Text>
-      </Group>
+      </Box>
     </Box>
   ));
 
   return (
-    <Paper withBorder p="md" radius="md">
-      <Group justify="space-between">
-        <Group align="flex-end" gap="xs">
-          <Text fz="xl" fw={700}>
-            345,765
+    <Paper withBorder padding="md" radius="md" style={{ maxWidth: '320px', margin: '0 auto' }}>
+      <Group position="apart" style={{ marginBottom: '1rem' }}>
+        <Group align="flex-end" spacing="xs">
+          <Text size="xl" weight={700}>
+            $5000
           </Text>
-          <Text c="teal" className={classes.diff} fz="sm" fw={700}>
+          <Text color="teal" style={{ display: 'flex', alignItems: 'center' }} size="sm" weight={700}>
             <span>18%</span>
-            <IconArrowUpRight
-              size="1rem"
-              style={{ marginBottom: rem(4) }}
-              stroke={1.5}
-            />
+            <IconArrowUpRight size="1rem" style={{ marginBottom: '0.25rem' }} stroke={1.5} />
           </Text>
         </Group>
-        <IconDeviceAnalytics
-          size="1.4rem"
-          className={classes.icon}
-          stroke={1.5}
-        />
+        <IconDeviceAnalytics size="1.4rem" style={{ color: '#38d9a9' }} stroke={1.5} />
       </Group>
 
-      <Text c="dimmed" fz="sm">
-        Page views compared to previous month
+      <Text color="dimmed" size="sm" style={{ marginBottom: '1rem' }}>
+        Fund allocation vs expenditure used
       </Text>
 
-      <Progress.Root
-        size={34}
-        classNames={{ label: classes.progressLabel }}
-        mt={40}
-      >
-        {segments}
-      </Progress.Root>
-      <SimpleGrid cols={{ base: 1, xs: 3 }} mt="xl">
+      <Progress size="lg" radius="md" mt={20} sections={segments} style={{ height: '16px' }} />
+
+      <SimpleGrid cols={1} mt="xl" spacing="sm">
         {descriptions}
       </SimpleGrid>
     </Paper>

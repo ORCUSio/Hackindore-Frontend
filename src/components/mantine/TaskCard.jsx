@@ -39,7 +39,7 @@ export function TaskCard() {
         </Text>
       </Text>
 
-      <Progress value={(23 / 36) * 100} mt={5} />
+      <Progress value={(23 / 36) * 100} size="xs" mt={5} />
 
       <Group justify="space-between" mt="md">
         <Avatar.Group spacing="sm">

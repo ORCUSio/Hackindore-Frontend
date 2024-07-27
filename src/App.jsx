@@ -76,7 +76,7 @@ function TaskManagementAdmin() {
 function TaskManagementManager() {
   return (
     <div className="">
-      <div className="gap-2 ">
+      <div className="gap-2 w-[800px] mx-auto" >
         <StatsRingCard />
         <TaskCard />
         <TaskCard />
