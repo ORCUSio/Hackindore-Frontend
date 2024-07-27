@@ -55,18 +55,41 @@ function App() {
 }
 
 function TaskManagementAdmin() {
+  const Funding = [
+    { label: "Resources", count: "76,548", part: 38.72, color: "#47d6ab" },
+    { label: "Man Power", count: "98,000", part: 49.57, color: "#03141a" },
+    { label: "miscellaneous", count: "23,118", part: 11.69, color: "#4fcdf7" },
+  ];
+
+  const Employee = [
+    { label: "Electrician", count: "204", part: 4.49, color: "#47d6ab" },
+    { label: "Construction", count: "121", part: 2.66, color: "#03141a" },
+    { label: "Mantainance", count: "1,118", part: 24.61, color: "#4fcdf7" },
+    { label: "Janitorial", count: "3,100", part: 68.24, color: "#2fc9f7" },
+  ];
+  const chartData = [
+    { date: "Jan 22", FuelUsage: 2890, MaintenanceCost: 2338 },
+    { date: "Feb 22", FuelUsage: 2756, MaintenanceCost: 2103 },
+    // ...other months
+  ];
   return (
     <div className="flex flex-wrap w-full p-2">
       <div className="p-2 max-w-[1100px] flex flex-col gap-20 overflow-x-hidden mx-auto">
         <div className="flex flex-wrap justify-between gap-20">
-          <StatsSegments />
-          <StatsSegments />
+          <StatsSegments title={"Expense report"} data={Funding} />
+          <StatsSegments title={"Employee report"} data={Employee} />
         </div>
         <div className="w-[]">
           <TableSort />
         </div>
         <div className="flex flex-wrap">
-          <AreaChartHero />
+          <AreaChartHero
+            title="Monthly Resource Usage"
+            total={34567}
+            chartData={chartData}
+            categories={["FuelUsage", "MaintenanceCost"]}
+            colors={["indigo", "cyan"]}
+          />
           <AreaChartHero />
           <AreaChartHero />
           <AreaChartHero />
@@ -95,6 +118,20 @@ const users = [
     avatar:
       "https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-8.png",
   },
+  {
+    id: 2,
+    name: "Harriette Spoonlicker",
+    email: "hspoonlicker@outlook.com",
+    avatar:
+      "https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-8.png",
+  },
+  {
+    id: 3,
+    name: "Harriette Spoonlicker",
+    email: "hspoonlicker@outlook.com",
+    avatar:
+      "https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-8.png",
+  },
   // Add more user objects here as needed
 ];
 
@@ -108,17 +145,19 @@ function TaskManagementWorkshop() {
     <div>
       <WorkshopBanner />
       <DummyKanban />
-      <div className="user-buttons">
-        {users.map((user) => (
-          <UserButton
-            key={user.id}
-            user={user}
-            onClick={() => handleUserClick(user)}
-          />
-        ))}
-      </div>
-      <div className="user-details">
-        {selectedUser && <UserDetails user={selectedUser} />}
+      <div className="user-buttons flex gap-2 w-full">
+        <div className="w-1/3">
+          {users.map((user) => (
+            <UserButton
+              key={user.id}
+              user={user}
+              onClick={() => handleUserClick(user)}
+            />
+          ))}
+        </div>
+        <div className="user-details">
+          {selectedUser && <UserDetails user={selectedUser} />}
+        </div>
       </div>
     </div>
   );
@@ -246,7 +285,7 @@ function AdminForms() {
 import { FiPlus, FiTrash } from "react-icons/fi";
 import { motion } from "framer-motion";
 import { FaFire } from "react-icons/fa";
-import { UserButton } from "./components/mantine/UserButton";
+import { UserButton, UserDetails } from "./components/mantine/UserButton";
 import { TableSort } from "./components/mantine/TableSort";
 import { AreaChartHero } from "./components/admin/AreaChartHero";
 

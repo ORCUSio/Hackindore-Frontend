@@ -10,13 +10,7 @@ import {
 import { IconArrowUpRight, IconDeviceAnalytics } from "@tabler/icons-react";
 import classes from "./StatsSegments.module.css";
 
-const data = [
-  { label: "Worker", count: "204,001", part: 59, color: "#47d6ab" },
-  { label: "vehicle", count: "121,017", part: 35, color: "#03141a" },
-  { label: "mi  ", count: "31,118", part: 6, color: "#4fcdf7" },
-];
-
-export default function StatsSegments() {
+export default function StatsSegments({ title, data }) {
   const segments = data.map((segment) => (
     <Progress.Section
       value={segment.part}
@@ -40,18 +34,25 @@ export default function StatsSegments() {
       <Group justify="space-between" align="flex-end" gap={0}>
         <Text fw={700}>{stat.count}</Text>
         <Text c={stat.color} fw={700} size="sm" className={classes.statCount}>
-          {stat.part}%
+          {stat.part.toFixed(2)}%
         </Text>
       </Group>
     </Box>
   ));
+
+  const total = data
+    .reduce(
+      (sum, segment) => sum + parseInt(segment.count.replace(/,/g, "")),
+      0
+    )
+    .toLocaleString();
 
   return (
     <Paper withBorder p="md" radius="md">
       <Group justify="space-between">
         <Group align="flex-end" gap="xs">
           <Text fz="xl" fw={700}>
-            345,765
+            {total}
           </Text>
           <Text c="teal" className={classes.diff} fz="sm" fw={700}>
             <span>18%</span>
@@ -70,7 +71,7 @@ export default function StatsSegments() {
       </Group>
 
       <Text c="dimmed" fz="sm">
-        Page views compared to previous month
+        {title}
       </Text>
 
       <Progress.Root

@@ -31,16 +31,25 @@ import { Card, Image } from "@mantine/core";
 
 export function UserDetails({ user }) {
   return (
-    <Card shadow="sm" padding="lg">
-      <Card.Section>
-        <Image src={user.avatar} height={160} alt={user.name} />
-      </Card.Section>
-      <Text size="lg" weight={500}>
-        {user.name}
-      </Text>
-      <Text size="sm" color="dimmed">
-        {user.email}
-      </Text>
-    </Card>
+    <div className="flex gap-2">
+      <div className="w-36">
+        <Image src={user.avatar} alt={user.name} />
+      </div>
+      <div>
+        <Text size="lg" weight={500}>
+          {user.name}
+        </Text>
+        <Text size="sm">
+          <span className="px-2 py-1 bg-gray-100"> emai:</span> {user.email}
+        </Text>
+        <Text size="sm">
+          <span className="px-2 py-1 bg-gray-100"> managed by:</span>{" "}
+          {user.email}
+        </Text>
+        <Text size="sm">
+          <span className="px-2 py-1 bg-gray-100"> job title:</span>
+        </Text>
+      </div>
+    </div>
   );
 }
