@@ -63,6 +63,26 @@ export function StatsRingCard() {
             }
           />
         </div>
+        <div className={classes.ring}>
+          <RingProgress
+            roundCaps
+            thickness={6}
+            size={150}
+            sections={[
+              { value: (completed / total) * 100, color: theme.primaryColor },
+            ]}
+            label={
+              <div>
+                <Text ta="center" fz="lg" className={classes.label}>
+                  {((completed / total) * 100).toFixed(0)}%
+                </Text>
+                <Text ta="center" fz="xs" c="dimmed">
+                  Funds
+                </Text>
+              </div>
+            }
+          />
+        </div>
       </div>
     </Card>
   );

@@ -31,7 +31,7 @@ function getContentPaths(dir, excludeDir) {
 content.push(...getContentPaths(srcDir, excludeDir));
 
 export default {
-  content,
+  content: [...content, "./node_modules/@tremor/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       // Set font family

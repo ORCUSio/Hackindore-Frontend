@@ -57,18 +57,20 @@ function App() {
 function TaskManagementAdmin() {
   return (
     <div className="flex flex-wrap w-full p-2">
-      <div className="p-2 max-w-[1200px] flex flex-col gap-20 overflow-x-hidden mx-auto">
-        <div className="flex flex-wrap justify-between/*  */">
+      <div className="p-2 max-w-[1100px] flex flex-col gap-20 overflow-x-hidden mx-auto">
+        <div className="flex flex-wrap justify-between gap-20">
           <AdminForms />
           <StatsSegments />
         </div>
-        <TableReviews />
-        {/* <div className="w-full h-[80vh]">
-          <DndList />
-        </div> */}
-      </div>
-      <div className="w-[350px] flex flex-col gap-2 p-4 rounded-lg bg-gray-50">
-        <StatsCard />
+        <div className="w-[]">
+          <TableSort />
+        </div>
+        <div className="flex flex-wrap">
+          <AreaChartHero />
+          <AreaChartHero />
+          <AreaChartHero />
+          <AreaChartHero />
+        </div>
       </div>
     </div>
   );
@@ -77,8 +79,9 @@ function TaskManagementAdmin() {
 function TaskManagementManager() {
   return (
     <div className="">
-      <div className="gap-2 ">
+      <div className="flex flex-col gap-2 max-w-[800px] mx-auto ">
         <StatsRingCard />
+
         <TaskCard />
         <TaskCard />
         <TaskCard />
@@ -226,6 +229,8 @@ import { FiPlus, FiTrash } from "react-icons/fi";
 import { motion } from "framer-motion";
 import { FaFire } from "react-icons/fa";
 import { UserButton } from "./components/mantine/UserButton";
+import { TableSort } from "./components/mantine/TableSort";
+import { AreaChartHero } from "./components/admin/AreaChartHero";
 
 export const DummyKanban = () => {
   return (
