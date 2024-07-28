@@ -28,7 +28,7 @@ import {
   IconChevronDown,
 } from "@tabler/icons-react";
 import classes from "./HeaderMegaMenu.module.css";
-
+import logo from "../../assets/logo.png";
 const mockdata = [
   {
     icon: IconCode,
@@ -94,8 +94,8 @@ export default function HeaderMegaMenu() {
       <header className={classes.header}>
         <Group justify="space-between" h="100%">
           {/* <MantineLogo size={30} /> */}
-          <h1>Logo</h1>
-
+          {/* <h1>Logo</h1> */}
+          <img src={logo} alt="" style={{ height: "70%" }} />
           <Group h="100%" gap={0} visibleFrom="sm">
             <a href="#" className={classes.link}>
               Home
@@ -154,13 +154,12 @@ export default function HeaderMegaMenu() {
               Learn
             </a>
             <a href="#" className={classes.link}>
-              Academy
+              Scheduling
             </a>
           </Group>
 
           <Group visibleFrom="sm">
-            <Button variant="default">Log in</Button>
-            <Button>Sign up</Button>
+            <Button>welcome</Button>
           </Group>
 
           <Burger
@@ -199,7 +198,7 @@ export default function HeaderMegaMenu() {
           </UnstyledButton>
           <Collapse in={linksOpened}>{links}</Collapse>
           <a href="#" className={classes.link}>
-            Learn
+            Reports
           </a>
           <a href="#" className={classes.link}>
             Academy
@@ -208,8 +207,7 @@ export default function HeaderMegaMenu() {
           <Divider my="sm" />
 
           <Group justify="center" grow pb="xl" px="md">
-            <Button variant="default">Log in</Button>
-            <Button>Sign up</Button>
+            <Button>logged in</Button>
           </Group>
         </ScrollArea>
       </Drawer>

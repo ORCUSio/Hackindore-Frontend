@@ -56,10 +56,7 @@ const router = createBrowserRouter([
         path: "/Reports",
         element: <TableSelection />,
       },
-      {
-        path: "/Scheduler",
-        element: <Scheduler />,
-      },
+
       {
         path: "/Maps",
         element: <Maps />,
@@ -160,12 +157,12 @@ function TaskManagementAdmin() {
   return (
     <div className="flex flex-wrap w-full p-2">
       <div className="p-2 max-w-[1100px] flex flex-col gap-20 overflow-x-hidden mx-auto">
+        <div className="w-[]">
+          <TableSort />
+        </div>
         <div className="flex flex-wrap justify-between gap-20">
           <StatsSegments title={"Expense report"} data={Funding} />
           <StatsSegments title={"Employee report"} data={Employee} />
-        </div>
-        <div className="w-[]">
-          <TableSort />
         </div>
         <div className="flex flex-wrap">
           <AreaChartHero
@@ -393,7 +390,7 @@ import { TableSort } from "./components/mantine/TableSort";
 import { AreaChartHero } from "./components/admin/AreaChartHero";
 import { NavbarSearch } from "./components/mantine/NavbarSearch";
 import { TableSelection } from "./components/mantine/TableSelection";
-import { Equipment, Pendings, Profits, Scheduling } from "./assets/data";
+import { Equipment, Pendings, Profits } from "./assets/data";
 import Maps from "./components/user/Maps";
 
 export const DummyKanban = () => {

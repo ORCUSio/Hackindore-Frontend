@@ -57,6 +57,7 @@ const data = [
 ];
 
 export function TableSelection({ mocks }) {
+  console.log(mocks);
   const [selection, setSelection] = useState([]);
   const toggleRow = (id) =>
     setSelection((current) =>

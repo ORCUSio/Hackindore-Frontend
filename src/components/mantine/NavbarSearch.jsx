@@ -27,12 +27,9 @@ const links = [
 ];
 
 const collections = [
-  { emoji: "📝", label: "Complaints" },
   { emoji: "🚚", label: "Equipments" },
   { emoji: "⏳", label: "Pendings" },
   { emoji: "💸", label: "Profits" },
-  { emoji: "📊", label: "Reports" },
-  { emoji: "🤖", label: "Scheduler" },
   { emoji: "🌎", label: "Maps" },
 ];
 
@@ -105,7 +102,19 @@ export function NavbarSearch() {
             </ActionIcon>
           </Tooltip>
         </Group>
-        <div className={classes.collections}>{collectionLinks}</div>
+        <div className={classes.collections}>
+          {collectionLinks}
+          <a
+            href="https://wkhsp-report---analytics-gd8rbqncxvkcfzjj2jg4zs.streamlit.app/"
+            target="_blank"
+            className={classes.collectionLink}
+          >
+            <span style={{ marginRight: rem(9), fontSize: rem(16) }}>🤖</span>{" "}
+            <span style={{ marginRight: rem(9), fontSize: rem(16) }}>
+              Scheduling
+            </span>{" "}
+          </a>
+        </div>
       </div>
     </nav>
   );
