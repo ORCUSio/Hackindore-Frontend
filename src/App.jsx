@@ -56,6 +56,14 @@ const router = createBrowserRouter([
         path: "/Reports",
         element: <TableSelection />,
       },
+      {
+        path: "/Scheduler",
+        element: <Scheduler />,
+      },
+      {
+        path: "/Maps",
+        element: <Maps />,
+      },
     ],
   },
 ]);
@@ -386,6 +394,7 @@ import { AreaChartHero } from "./components/admin/AreaChartHero";
 import { NavbarSearch } from "./components/mantine/NavbarSearch";
 import { TableSelection } from "./components/mantine/TableSelection";
 import { Equipment, Pendings, Profits, Scheduling } from "./assets/data";
+import Maps from "./components/user/Maps";
 
 export const DummyKanban = () => {
   return (

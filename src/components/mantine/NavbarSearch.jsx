@@ -27,12 +27,13 @@ const links = [
 ];
 
 const collections = [
-  { emoji: "👍", label: "complaints" },
-  { emoji: "🚚", label: "equipments" },
-  { emoji: "💸", label: "pendings" },
-  { emoji: "💰", label: "Profits" },
-  { emoji: "✨", label: "Reports" },
-  { emoji: "💬", label: "chat" },
+  { emoji: "📝", label: "Complaints" },
+  { emoji: "🚚", label: "Equipments" },
+  { emoji: "⏳", label: "Pendings" },
+  { emoji: "💸", label: "Profits" },
+  { emoji: "📊", label: "Reports" },
+  { emoji: "🤖", label: "Scheduler" },
+  { emoji: "🌎", label: "Maps" },
 ];
 
 export function NavbarSearch() {
@@ -41,7 +42,7 @@ export function NavbarSearch() {
       <UnstyledButton key={link.label} className={classes.mainLink}>
         <div className={classes.mainLinkInner}>
           <link.icon size={20} className={classes.mainLinkIcon} stroke={1.5} />
-          <span>{link.label}</span>
+          <span size={36}>{link.label}</span>
         </div>
         {link.notifications && (
           <Badge size="sm" variant="filled" className={classes.mainLinkBadge}>
@@ -61,7 +62,9 @@ export function NavbarSearch() {
       <span style={{ marginRight: rem(9), fontSize: rem(16) }}>
         {collection.emoji}
       </span>{" "}
-      {collection.label}
+      <span style={{ marginRight: rem(9), fontSize: rem(16) }}>
+        {collection.label}
+      </span>{" "}
     </Link>
   ));
 
