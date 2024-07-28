@@ -125,7 +125,7 @@ export function NavbarSearch() {
           >
             <span style={{ marginRight: rem(9), fontSize: rem(16) }}>🤖</span>{" "}
             <span style={{ marginRight: rem(9), fontSize: rem(16) }}>
-              AI Scheduling
+              AI Scheduler
             </span>{" "}
           </a>
         </div>
