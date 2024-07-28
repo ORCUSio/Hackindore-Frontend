@@ -22,8 +22,12 @@ import { Link } from "react-router-dom";
 
 const links = [
   { icon: IconBulb, label: "Dashboard", notifications: 3, url: "/" },
-  { icon: IconCheckbox, label: "Manage", notifications: 4, url: "/manager" },
-  { icon: IconUser, label: "Employee", url: "/employee" },
+  {
+    icon: IconCheckbox,
+    label: "Progress Tracker",
+    notifications: 4,
+    url: "/manager",
+  },
 ];
 
 const collections = [
@@ -109,9 +113,19 @@ export function NavbarSearch() {
             target="_blank"
             className={classes.collectionLink}
           >
+            <span style={{ marginRight: rem(9), fontSize: rem(16) }}>📝</span>{" "}
+            <span style={{ marginRight: rem(9), fontSize: rem(16) }}>
+              AI Reports
+            </span>{" "}
+          </a>
+          <a
+            href="https://nagar-mitra-scheduler.onrender.com/"
+            target="_blank"
+            className={classes.collectionLink}
+          >
             <span style={{ marginRight: rem(9), fontSize: rem(16) }}>🤖</span>{" "}
             <span style={{ marginRight: rem(9), fontSize: rem(16) }}>
-              Scheduling
+              AI Scheduling
             </span>{" "}
           </a>
         </div>

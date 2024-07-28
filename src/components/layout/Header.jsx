@@ -32,33 +32,35 @@ import logo from "../../assets/logo.png";
 const mockdata = [
   {
     icon: IconCode,
-    title: "Open source",
-    description: "This Pokémon’s cry is very loud and distracting",
+    title: "AI Scheduler",
+    description:
+      "Manage and optimize your schedules using advanced AI algorithms.",
   },
   {
     icon: IconCoin,
-    title: "Free for everyone",
-    description: "The fluid of Smeargle’s tail secretions changes",
+    title: "Profits",
+    description:
+      "Track and analyze your profit margins and financial performance.",
   },
   {
     icon: IconBook,
-    title: "Documentation",
-    description: "Yanma is capable of seeing 360 degrees without",
+    title: "Maps",
+    description: "Create, view, and manage detailed maps for various purposes.",
   },
   {
     icon: IconFingerprint,
-    title: "Security",
-    description: "The shell’s rounded shape and the grooves on its.",
+    title: "Pending",
+    description: "View and manage all pending tasks and items awaiting action.",
   },
   {
     icon: IconChartPie3,
-    title: "Analytics",
-    description: "This Pokémon uses its flying ability to quickly chase",
+    title: "AI Reports",
+    description: "Generate detailed AI-powered reports for in-depth analysis.",
   },
   {
     icon: IconNotification,
-    title: "Notifications",
-    description: "Combusken battles with the intensely hot flames it spews",
+    title: "Progress Tracker",
+    description: "Monitor and track progress on your projects and tasks.",
   },
 ];
 
