@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Table,
   ScrollArea,
@@ -18,6 +18,13 @@ import {
   IconSearch,
 } from "@tabler/icons-react";
 import classes from "./TableSort.module.css";
+import axios from "axios";
+
+const axiosInst = axios.create({
+  baseURL: "http://localhost:8080/",
+});
+
+export { axiosInst };
 
 function Th({ children, reversed, sorted, onSort }) {
   const Icon = sorted
@@ -108,6 +115,13 @@ export function TableSort() {
   const [sortBy, setSortBy] = useState(null);
   const [reverseSortDirection, setReverseSortDirection] = useState(false);
 
+  useEffect(() => {
+    const fetched = async () => {
+      const res = await axiosInst.get("/employees");
+      setSortedData(res);
+    };
+    fetched();
+  }, []);
   const setSorting = (field) => {
     const reversed = field === sortBy ? !reverseSortDirection : false;
     setReverseSortDirection(reversed);
