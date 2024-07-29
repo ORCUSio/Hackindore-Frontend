@@ -115,13 +115,6 @@ export function TableSort() {
   const [sortBy, setSortBy] = useState(null);
   const [reverseSortDirection, setReverseSortDirection] = useState(false);
 
-  useEffect(() => {
-    const fetched = async () => {
-      const res = await axiosInst.get("/employees");
-      setSortedData(res);
-    };
-    fetched();
-  }, []);
   const setSorting = (field) => {
     const reversed = field === sortBy ? !reverseSortDirection : false;
     setReverseSortDirection(reversed);
