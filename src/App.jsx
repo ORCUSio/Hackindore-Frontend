@@ -12,7 +12,6 @@ import TableReviews from "./components/layout/TableReviews";
 import NavbarSimpleColored from "./components/layout/NavbarSimpleColored";
 
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
-import StatsCard from "./components/mantine/StatsCard";
 import StatsSegments from "./components/mantine/StatsSegments";
 import { DndList } from "./components/DndList";
 import { StatsRingCard } from "./components/mantine/StatsRingCard";
@@ -390,7 +389,7 @@ import { TableSort } from "./components/mantine/TableSort";
 import { AreaChartHero } from "./components/admin/AreaChartHero";
 import { NavbarSearch } from "./components/mantine/NavbarSearch";
 import { TableSelection } from "./components/mantine/TableSelection";
-import { Equipment, Pendings, Profits } from "./assets/data";
+import { Equipment, Pendings, Profits, Scheduling } from "./assets/data";
 import Maps from "./components/user/Maps";
 
 export const DummyKanban = () => {
