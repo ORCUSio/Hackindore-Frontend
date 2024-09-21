@@ -97,7 +97,8 @@ export default function HeaderMegaMenu() {
         <Group justify="space-between" h="100%">
           {/* <MantineLogo size={30} /> */}
           {/* <h1>Logo</h1> */}
-          <img src={logo} alt="" style={{ height: "70%" }} />
+{/*           <img src={logo} alt="" style={{ height: "70%" }} /> */}
+          <h1 className="font-bold text-2xl">The Crafters</h1>
           <Group h="100%" gap={0} visibleFrom="sm">
             <a href="#" className={classes.link}>
               Home
